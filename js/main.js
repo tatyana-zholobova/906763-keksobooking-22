@@ -1,9 +1,9 @@
-const getRandomIntInclusive = function (min, max) {
+const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
 
   if (min < 0 || max < 0 || min === max) {
-    alert('Введите разные неотрицательные числа');
+    throw new Error('Некорректный ввод данных');
   } else if (min > max) {
     [min, max] = [max, min];
   }
@@ -12,9 +12,9 @@ const getRandomIntInclusive = function (min, max) {
 
 getRandomIntInclusive();
 
-const getRandomDecimalNumber = function (min, max, digits) {
+const getRandomDecimalNumber = (min, max, digits) => {
   if (min < 0 || max < 0 || min === max || digits < 0) {
-    alert('Некорректный ввод данных')
+    throw new Error('Некорректный ввод данных');
   }
   if (min > max) {
     [min, max] = [max, min];
