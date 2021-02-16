@@ -78,22 +78,19 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomIntInclusive(0, elements.length - 1)];
 };
 
-// Получить массив случайной длины из другого массива без повторов значений
-const getRandomElementsFromArray = (array) => Array.from(
-  { length: getRandomIntInclusive(1, array.length) },
-  () => array.splice(Math.random() * array.length | 0, 1)[0],
-);
+// Получить массив случайной длины из другого массива
+const getRandomElementsFromArray = (array) => array.slice(0, getRandomIntInclusive(0, array.length - 1));
 
 const createSimalarAd = () => {
-  let latitude = getRandomDecimalNumber(MIN_LATITUDE, MAX_LATITUDE, DIGITS);
-  let longitude = getRandomDecimalNumber(MIN_LONGITUDE, MAX_LONGITUDE, DIGITS);
+  const latitude = getRandomDecimalNumber(MIN_LATITUDE, MAX_LATITUDE, DIGITS);
+  const longitude = getRandomDecimalNumber(MIN_LONGITUDE, MAX_LONGITUDE, DIGITS);
   return {
     author: {
-      avatar: 'img/avatars/user0${getRandomIntInclusive(1, 8)}.png',
+      avatar: `img/avatars/user0${getRandomIntInclusive(1, 8)}.png`,
     },
     offer: {
       title: 'Рассмотрите вариант поблизости',
-      address: '${latitude}, ${longitude}',
+      address: `${latitude}, ${longitude}`,
       price: getRandomIntInclusive(0, MAX_PRICE),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomIntInclusive(0, MAX_NUMBER_OF_ROOMS),
@@ -111,4 +108,5 @@ const createSimalarAd = () => {
   }
 }
 
-const similarAds = new Array(SIMILAR_ADS_COUNT).fill(null).map(() => createSimalarAd());
+const similarAds = new Array(SIMILAR_ADS_COUNT).fill(null).map(createSimalarAd);
+console.log(similarAds);
