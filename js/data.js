@@ -79,4 +79,5 @@ const createSimalarAd = () => {
 }
 
 const similarAds = new Array(SIMILAR_ADS_COUNT).fill(null).map(createSimalarAd);
-console.log(similarAds);
+
+export { similarAds };
