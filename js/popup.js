@@ -1,4 +1,6 @@
-import { similarAds } from './data.js';
+const PHOTO_WIDTH = 45;
+const PHOTO_HEIGHT = 40;
+const PHOTO_ALT = 'Фотография жилья';
 
 const cardTemplate = document.querySelector('#card').content;
 
@@ -20,27 +22,39 @@ const generateOfferCard = ({ author, offer }) => {
 
   const featuresList = cardElement.querySelector('.popup__features');
   featuresList.innerHTML = '';
-  for (let element of offer.features) {
-    const newFeature = document.createElement('li');
-    newFeature.className = `popup__feature popup__feature--${element}`;
-    featuresList.appendChild(newFeature);
+
+  const renderFeatures = (list, container) => {
+    list.forEach((element) => {
+      const newElement = document.createElement(container);
+      newElement.className = `popup__feature popup__feature--${element}`;
+      featuresList.appendChild(newElement);
+    })
   }
+
+  renderFeatures(offer.features, 'li');
+
   cardElement.querySelector('.popup__description').textContent = offer.description;
 
   const photosList = cardElement.querySelector('.popup__photos');
   photosList.innerHTML = '';
-  for (let element of offer.photos) {
-    const newPhoto = document.createElement('img');
-    newPhoto.className = 'popup__photo';
-    newPhoto.src = element;
-    newPhoto.width = 45;
-    newPhoto.height = 40;
-    newPhoto.alt = 'Фотография жилья';
-    photosList.appendChild(newPhoto);
+
+  const renderPhotos = (list, container) => {
+    list.forEach((element) => {
+      const newElement = document.createElement(container);
+      newElement.className = 'popup__photo';
+      newElement.src = element;
+      newElement.width = PHOTO_WIDTH;
+      newElement.height = PHOTO_HEIGHT;
+      newElement.alt = PHOTO_ALT;
+      photosList.appendChild(newElement);
+    })
   }
+
+  renderPhotos(offer.photos, 'img');
+
   cardElement.querySelector('.popup__avatar').src = author.avatar;
   return cardElement;
 }
 
-const mapCanvas = document.querySelector('#map-canvas');
-mapCanvas.appendChild(generateOfferCard(similarAds[0]));
+export { generateOfferCard };
+
