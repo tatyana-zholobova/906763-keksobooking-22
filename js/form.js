@@ -1,3 +1,6 @@
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+const MAX_PRICE = 1000000;
 const adForm = document.querySelector('.ad-form');
 const adFormFielsets = adForm.querySelectorAll('.ad-form-header, .ad-form__element');
 const filterForm = document.querySelector('.map__filters');
@@ -7,6 +10,9 @@ const priceInput = adForm.querySelector('#price');
 const typeOfPlacement = adForm.querySelector('#type');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
+const adTitle = adForm.querySelector('#title');
+const roomNumber = adForm.querySelector('#room_number');
+const capacity = adForm.querySelector('#capacity');
 const minPrice = {
   bungalow: '0',
   flat: '1000',
@@ -47,5 +53,51 @@ timeIn.addEventListener('change', () => {
 timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 })
+
+adTitle.addEventListener('input', () => {
+  const valueLength = adTitle.value.length;
+  if (valueLength < MIN_TITLE_LENGTH) {
+    adTitle.setCustomValidity('Ещё ' + (MIN_TITLE_LENGTH - valueLength) + ' симв.')
+  } else if (valueLength > MAX_TITLE_LENGTH) {
+    adTitle.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) + ' симв.');
+  } else {
+    adTitle.setCustomValidity('');
+  }
+  adTitle.reportValidity();
+});
+
+
+priceInput.addEventListener('invalid', () => {
+  if (priceInput.validity.rangeOverflow) {
+    priceInput.setCustomValidity('Максимальная цена за ночь' + MAX_PRICE + ' руб.');
+  } else if (priceInput.value < 0) {
+    priceInput.setCustomValidity('Введите положительное значение');
+  } else if (priceInput.validity.rangeUnderflow) {
+    priceInput.setCustomValidity('Минимальная цена за ночь ' + priceInput.min + ' руб.');
+  } else if (priceInput.validity.valueMissing) {
+    priceInput.setCustomValidity('Обязательное поле');
+  } else {
+    priceInput.setCustomValidity('');
+  }
+});
+
+const seLectNumderOfGuests = () => {
+  if (roomNumber.value === 100) {
+    capacity.setCustomValidity('Этот вариант не для гостей');
+  } else if (roomNumber.value < capacity.value) {
+    capacity.setCustomValidity('Количество гостей не должно превышать количество комнат');
+  } else {
+    capacity.setCustomValidity('');
+  }
+}
+
+roomNumber.addEventListener('change', seLectNumderOfGuests);
+capacity.addEventListener('change', seLectNumderOfGuests);
+
+adForm.addEventListener('submit', (evt) => {
+  if (!adTitle.validity.valid || !priceInput.validity.valid || !capacity.validity.valid) {
+    evt.preventDefault();
+  }
+});
 
 export { activateForm, addressInrut }
