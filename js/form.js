@@ -13,9 +13,7 @@ const timeOut = adForm.querySelector('#timeout');
 const adTitle = adForm.querySelector('#title');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
-const successTemplate = document.querySelector('#success').content;
-const errorTemplate = document.querySelector('#error').content;
-const main = document.querySelector('main');
+
 const minPrice = {
   bungalow: '0',
   flat: '1000',
@@ -96,20 +94,6 @@ const seLectNumderOfGuests = () => {
 
 roomNumber.addEventListener('change', seLectNumderOfGuests);
 capacity.addEventListener('change', seLectNumderOfGuests);
-
-const showMessageSuccsess = () => {
-  const messageSuccess = successTemplate.cloneNode(true);
-  const popupSuccess = messageSuccess.querySelector('.success');
-  popupSuccess.style.zIndex = '1000';
-  main.appendChild(popupSuccess);
-}
-
-const showMessageError = () => {
-  const messageError = errorTemplate.cloneNode(true);
-  const popupError = messageError.querySelector('.error');
-  popupError.style.zIndex = '1000';
-  main.appendChild(popupError);
-}
 
 
 const setUserFormSubmit = (onSuccess) => {
