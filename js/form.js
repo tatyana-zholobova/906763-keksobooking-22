@@ -1,3 +1,6 @@
+import { showMessageError } from './message.js'
+import { sendData } from './api.js'
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
@@ -13,6 +16,7 @@ const timeOut = adForm.querySelector('#timeout');
 const adTitle = adForm.querySelector('#title');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+const buttonReset = adForm.querySelector('.ad-form__reset');
 
 const minPrice = {
   bungalow: '0',
@@ -95,22 +99,19 @@ const seLectNumderOfGuests = () => {
 roomNumber.addEventListener('change', seLectNumderOfGuests);
 capacity.addEventListener('change', seLectNumderOfGuests);
 
-
 const setUserFormSubmit = (onSuccess) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const formData = new FormData(evt.target);
-    fetch(
-      'https://22.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    ).then(() => onSuccess())
-      .catch((err) => {
-        console.error(err);
-      });
+    sendData(
+      () => onSuccess(),
+      () => showMessageError(),
+      new FormData(evt.target),
+    );
   });
+};
+
+const resetForm = () => {
+  adForm.reset();
 }
 
-export { activateForm, addressInrut, setUserFormSubmit }
+export { activateForm, addressInrut, setUserFormSubmit, buttonReset, resetForm }

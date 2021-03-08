@@ -17,7 +17,6 @@ const map = L.map('map-canvas')
     lng: LONGITUDE_DEFAUNT,
   }, ZOOM_DEFAUNT);
 
-
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
@@ -41,7 +40,6 @@ const mainPinMarker = L.marker(
     icon: mainPinIcon,
   },
 );
-
 mainPinMarker.addTo(map);
 
 mainPinMarker.on('moveend', (evt) => {
@@ -81,7 +79,19 @@ const renderPins = (data) => {
       );
   })
 }
-export { renderPins }
+
+const resetMap = () => {
+  map.setView({
+    lat: LATITUDE_DEFAUNT,
+    lng: LONGITUDE_DEFAUNT,
+  }, ZOOM_DEFAUNT);
+  mainPinMarker.setLatLng({
+    lat: LATITUDE_DEFAUNT,
+    lng: LONGITUDE_DEFAUNT,
+  });
+}
+
+export { renderPins, resetMap }
 
 
 

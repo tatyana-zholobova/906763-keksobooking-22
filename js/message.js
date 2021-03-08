@@ -34,11 +34,10 @@ const showMessageError = () => {
 
   popupError.style.zIndex = '5000';
   main.appendChild(popupError);
-  cLosePopup(popupError);
-
   buttonClose.addEventListener('click', () => {
     popupError.remove();
   });
+  cLosePopup(popupError);
 }
 
 export { showMessageSuccsess, showMessageError }
