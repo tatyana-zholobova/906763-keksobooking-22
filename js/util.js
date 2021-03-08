@@ -57,4 +57,8 @@ const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 };
 
-export { getRandomIntInclusive, getRandomDecimalNumber, getRandomArrayElement, getRandomElementsFromArray, showAlert, isEscEvent };
+const resetForm = (form) => {
+  form.reset()
+}
+
+export { getRandomIntInclusive, getRandomDecimalNumber, getRandomArrayElement, getRandomElementsFromArray, showAlert, isEscEvent, resetForm };

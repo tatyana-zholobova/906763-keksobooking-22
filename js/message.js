@@ -23,7 +23,6 @@ const showMessageSuccsess = () => {
   const popupSuccess = messageSuccess.querySelector('.success');
   popupSuccess.style.zIndex = '5000';
   main.appendChild(popupSuccess);
-
   cLosePopup(popupSuccess);
 }
 

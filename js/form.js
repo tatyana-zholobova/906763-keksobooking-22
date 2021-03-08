@@ -110,8 +110,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-const resetForm = () => {
-  adForm.reset();
-}
-
-export { activateForm, addressInrut, setUserFormSubmit, buttonReset, resetForm }
+export { activateForm, addressInrut, setUserFormSubmit, buttonReset, adForm }

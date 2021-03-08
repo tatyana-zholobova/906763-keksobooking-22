@@ -2,9 +2,10 @@ import './popup.js'
 import './map.js'
 import { renderPins, resetMap } from './map.js'
 import { getData } from './api.js'
-import { showAlert } from './util.js'
+import { showAlert, resetForm } from './util.js'
 import { showMessageSuccsess } from './message.js'
-import { setUserFormSubmit, buttonReset, resetForm } from './form.js'
+import { setUserFormSubmit, buttonReset, adForm } from './form.js'
+import { filterForm } from './filter.js'
 
 const ERROR_GETTING_DATA = 'Не удалось получить данные с сервера. Попробуйте позже';
 
@@ -14,9 +15,11 @@ getData(
     showAlert(ERROR_GETTING_DATA)
   })
 
-setUserFormSubmit(showMessageSuccsess)
-
-buttonReset.addEventListener('click', () => {
-  resetForm();
+const resetData = () => {
+  resetForm(adForm);
+  resetForm(filterForm);
   resetMap();
-})
+}
+buttonReset.addEventListener('click', resetData);
+setUserFormSubmit(showMessageSuccsess);
+setUserFormSubmit(resetData);
