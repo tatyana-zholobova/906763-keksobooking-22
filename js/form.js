@@ -13,6 +13,9 @@ const timeOut = adForm.querySelector('#timeout');
 const adTitle = adForm.querySelector('#title');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+const successTemplate = document.querySelector('#success').content;
+const errorTemplate = document.querySelector('#error').content;
+const main = document.querySelector('main');
 const minPrice = {
   bungalow: '0',
   flat: '1000',
@@ -94,10 +97,36 @@ const seLectNumderOfGuests = () => {
 roomNumber.addEventListener('change', seLectNumderOfGuests);
 capacity.addEventListener('change', seLectNumderOfGuests);
 
-adForm.addEventListener('submit', (evt) => {
-  if (!adTitle.validity.valid || !priceInput.validity.valid || !capacity.validity.valid) {
-    evt.preventDefault();
-  }
-});
+const showMessageSuccsess = () => {
+  const messageSuccess = successTemplate.cloneNode(true);
+  const popupSuccess = messageSuccess.querySelector('.success');
+  popupSuccess.style.zIndex = '1000';
+  main.appendChild(popupSuccess);
+}
 
-export { activateForm, addressInrut }
+const showMessageError = () => {
+  const messageError = errorTemplate.cloneNode(true);
+  const popupError = messageError.querySelector('.error');
+  popupError.style.zIndex = '1000';
+  main.appendChild(popupError);
+}
+
+
+const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+    fetch(
+      'https://22.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then(() => onSuccess())
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+}
+
+export { activateForm, addressInrut, setUserFormSubmit }
