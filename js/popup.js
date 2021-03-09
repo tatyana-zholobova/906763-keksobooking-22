@@ -18,7 +18,7 @@ const generateOfferCard = ({ author, offer }) => {
   cardElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   cardElement.querySelector('.popup__type').textContent = translationRu[offer.type];
   cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
-  cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.chekin}, выезд до ${offer.chekout}`;
+  cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
   const featuresList = cardElement.querySelector('.popup__features');
   featuresList.innerHTML = '';

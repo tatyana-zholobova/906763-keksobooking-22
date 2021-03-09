@@ -1,3 +1,6 @@
+import { showMessageError } from './message.js'
+import { sendData } from './api.js'
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
@@ -13,6 +16,8 @@ const timeOut = adForm.querySelector('#timeout');
 const adTitle = adForm.querySelector('#title');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+const buttonReset = adForm.querySelector('.ad-form__reset');
+
 const minPrice = {
   bungalow: '0',
   flat: '1000',
@@ -94,10 +99,15 @@ const seLectNumderOfGuests = () => {
 roomNumber.addEventListener('change', seLectNumderOfGuests);
 capacity.addEventListener('change', seLectNumderOfGuests);
 
-adForm.addEventListener('submit', (evt) => {
-  if (!adTitle.validity.valid || !priceInput.validity.valid || !capacity.validity.valid) {
+const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+    sendData(
+      () => onSuccess(),
+      () => showMessageError(),
+      new FormData(evt.target),
+    );
+  });
+};
 
-export { activateForm, addressInrut }
+export { activateForm, addressInrut, setUserFormSubmit, buttonReset, adForm }
