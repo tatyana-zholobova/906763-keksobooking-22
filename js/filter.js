@@ -2,8 +2,8 @@ import { SIMILAR_ADS_COUNT } from './data.js'
 import { clearMap } from './map.js'
 
 const DEFAUNT_VALUE = 'any';
-const MIN_PANGE_PRICE = 10000;
-const MAX_PANGE_PRICE = 50000;
+const MIN_RANGE_PRICE = 10000;
+const MAX_RANGE_PRICE = 50000;
 
 const filterForm = document.querySelector('.map__filters');
 const typeFilter = filterForm.querySelector('#housing-type');
@@ -34,11 +34,11 @@ const checkType = (data) => {
 const checkPrice = (data) => {
   switch (priceFilter.value) {
     case 'low':
-      return data.offer.price < MIN_PANGE_PRICE;
+      return data.offer.price < MIN_RANGE_PRICE;
     case 'middle':
-      return data.offer.price >= MIN_PANGE_PRICE && data.offer.price <= MAX_PANGE_PRICE;
+      return data.offer.price >= MIN_RANGE_PRICE && data.offer.price <= MAX_RANGE_PRICE;
     case 'high':
-      return data.offer.price > MAX_PANGE_PRICE;
+      return data.offer.price > MAX_RANGE_PRICE;
     case 'any':
       return true;
   }
