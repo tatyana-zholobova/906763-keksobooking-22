@@ -50,7 +50,7 @@ mainPinMarker.on('moveend', (evt) => {
   addressInrut.value = roundedCoordinates.join(', ');
 });
 
-
+const allPins = []
 const renderPins = (data) => {
   data.forEach((element) => {
     const pinIcon = L.icon({
@@ -77,7 +77,9 @@ const renderPins = (data) => {
           keepInView: true,
         },
       );
+    allPins.push(marker);
   })
+  return allPins;
 }
 
 const resetMap = () => {
@@ -91,7 +93,14 @@ const resetMap = () => {
   });
 }
 
-export { renderPins, resetMap }
+const clearMap = () => {
+  allPins.forEach((element) => {
+    element.remove()
+  })
+  map.closePopup();
+}
+
+export { renderPins, resetMap, clearMap }
 
 
 
