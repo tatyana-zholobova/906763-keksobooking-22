@@ -3,6 +3,8 @@
 import './popup.js'
 import './map.js'
 import { renderPins, resetMap } from './map.js'
+import './photo.js'
+import { resetPreviews } from './photo.js'
 import { getData } from './api.js'
 import { showAlert, resetForm } from './util.js'
 import { showMessageSuccsess } from './message.js'
@@ -30,6 +32,7 @@ const resetData = () => {
   resetForm(adForm);
   resetForm(filterForm);
   resetMap();
+  resetPreviews();
 }
 
 buttonReset.addEventListener('click', resetData);
