@@ -1,3 +1,5 @@
+/* global _:readonly */
+
 import './popup.js'
 import './map.js'
 import { renderPins, resetMap } from './map.js'
@@ -8,13 +10,14 @@ import { setUserFormSubmit, buttonReset, adForm } from './form.js'
 import { filterForm, filterAds, changeFilter, unlockFilterForm } from './filter.js'
 
 const ERROR_GETTING_DATA = 'Не удалось получить данные с сервера. Попробуйте позже';
+const RERENDER_DELAY = 500;
 
 const loadingDataHandler = (data) => {
   renderPins(data);
   unlockFilterForm();
-  changeFilter(() => {
+  changeFilter(_.debounce(() => {
     renderPins(filterAds(data))
-  })
+  }), RERENDER_DELAY)
 }
 
 getData(
