@@ -27,22 +27,31 @@ userPhotoChooser.addEventListener('change', (evt) => {
   checkFileExtension(evt.target, userPhotoImage)
 })
 
-housingPhotoChooser.addEventListener('change', (evt) => {
-  if (housingPhotoContainer.hasChildNodes()) {
-    housingPhotoContainer.removeChild(housingPhotoContainer.firstChild)
+const removeOnlyOneImage = (container) => {
+  container.removeChild(container.firstChild)
+}
+
+const createOnlyOneImage = (container, alt) => {
+  if (container.hasChildNodes()) {
+    removeOnlyOneImage(container);
   }
-  const housingPhotoImage = document.createElement('img');
-  housingPhotoImage.style.width = '100%';
-  housingPhotoImage.style.height = '100%';
-  housingPhotoImage.style.objectFit = 'cover';
-  housingPhotoImage.alt = HOUSING_PHOTO_ALT;
-  housingPhotoContainer.appendChild(housingPhotoImage);
+  const image = document.createElement('img');
+  image.style.width = '100%';
+  image.style.height = '100%';
+  image.style.objectFit = 'cover';
+  image.alt = alt;
+  housingPhotoContainer.appendChild(image);
+  return image;
+}
+
+housingPhotoChooser.addEventListener('change', (evt) => {
+  const housingPhotoImage = createOnlyOneImage(housingPhotoContainer, HOUSING_PHOTO_ALT)
   checkFileExtension(evt.target, housingPhotoImage)
 })
 
 const resetPreviews = () => {
   userPhotoImage.src = USER_PHOTO_EMPTY;
-  housingPhotoContainer.removeChild(housingPhotoContainer.firstChild);
+  removeOnlyOneImage(housingPhotoContainer);
 }
 
 export { resetPreviews }
