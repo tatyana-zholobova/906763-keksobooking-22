@@ -45,11 +45,11 @@ const checkPrice = (data) => {
 };
 
 const checkRooms = (data) => {
-  return +roomsFilter.value === data.offer.rooms || roomsFilter.value === DEFAUNT_VALUE
+  return Number(roomsFilter.value) === data.offer.rooms || roomsFilter.value === DEFAUNT_VALUE
 }
 
 const checkGuests = (data) => {
-  return +guestsFilter.value === data.offer.guests || guestsFilter.value === DEFAUNT_VALUE
+  return Number(guestsFilter.value) === data.offer.guests || guestsFilter.value === DEFAUNT_VALUE
 }
 
 const checkFeatures = (data) => {
