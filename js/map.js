@@ -1,6 +1,6 @@
 /* global L:readonly */
 
-import { activateForm, addressInrut } from './form.js';
+import { activateForm, addressInput } from './form.js';
 import { generateOfferCard } from './popup.js';
 
 const LATITUDE_DEFAUNT = 35.68170;
@@ -47,7 +47,7 @@ mainPinMarker.on('moveend', (evt) => {
   const roundedCoordinates = Object.values(currentCoordinates).map((element) => {
     return Number(element.toFixed(DIGITS));
   });
-  addressInrut.value = roundedCoordinates.join(', ');
+  addressInput.value = roundedCoordinates.join(', ');
 });
 
 const allPins = []
