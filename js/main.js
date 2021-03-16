@@ -17,9 +17,10 @@ const RERENDER_DELAY = 500;
 const loadingDataHandler = (data) => {
   renderPins(data);
   unlockFilterForm();
-  changeFilter(_.debounce(() => {
+  const renderFilteredPins = () => {
     renderPins(filterAds(data))
-  }), RERENDER_DELAY)
+  }
+  changeFilter(_.debounce(renderFilteredPins, RERENDER_DELAY))
 }
 
 getData(

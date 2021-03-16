@@ -8,7 +8,7 @@ const adForm = document.querySelector('.ad-form');
 const adFormFielsets = adForm.querySelectorAll('.ad-form-header, .ad-form__element');
 const filterForm = document.querySelector('.map__filters');
 const filterFormFields = filterForm.querySelectorAll('.map__filter, .map__features');
-const addressInrut = adForm.querySelector('#address');
+const addressInput = adForm.querySelector('#address');
 const priceInput = adForm.querySelector('#price');
 const typeOfPlacement = adForm.querySelector('#type');
 const timeIn = adForm.querySelector('#timein');
@@ -110,4 +110,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export { activateForm, addressInrut, setUserFormSubmit, buttonReset, adForm }
+export { activateForm, addressInput, setUserFormSubmit, buttonReset, adForm }
